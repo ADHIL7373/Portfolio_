@@ -1,7 +1,8 @@
 document.getElementById("navbar").innerHTML = `
-<nav class="nav">
+<nav class="nav" id="mainNav">
   <div class="nav-logo">➤ ADHIL</div>
-  <ul>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Toggle navigation">☰</button>
+  <ul id="navLinks">
     <li><a href="#hero">Home</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#skills">Skills</a></li>
@@ -12,6 +13,22 @@ document.getElementById("navbar").innerHTML = `
   </ul>
 </nav>
 `;
+
+// Hamburger toggle
+const hamburger = document.getElementById('navHamburger');
+const mainNav   = document.getElementById('mainNav');
+if (hamburger && mainNav) {
+  hamburger.addEventListener('click', () => {
+    mainNav.classList.toggle('nav-open');
+    hamburger.textContent = mainNav.classList.contains('nav-open') ? '✕' : '☰';
+  });
+  document.querySelectorAll('#navLinks a').forEach(link => {
+    link.addEventListener('click', () => {
+      mainNav.classList.remove('nav-open');
+      hamburger.textContent = '☰';
+    });
+  });
+}
 
 // Smooth scrolling - only on explicit user click, not on page load
 let isPageLoaded = false;

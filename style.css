@@ -194,6 +194,24 @@ header {
   width: 100%;
 }
 
+/* Hamburger button — hidden on desktop, shown on mobile */
+.nav-hamburger {
+  display: none;
+  background: none;
+  border: 1px solid var(--border-color);
+  color: var(--accent-blue);
+  font-size: 22px;
+  cursor: pointer;
+  padding: 4px 11px;
+  border-radius: 6px;
+  line-height: 1.3;
+  transition: all 0.2s ease;
+}
+.nav-hamburger:hover {
+  border-color: var(--accent-blue);
+  background: var(--glow-blue);
+}
+
 /* ============================================
    HERO SECTION
    ============================================ */
@@ -1407,20 +1425,59 @@ h2::after {
     right: 10px;
   }
 
+  .nav-hamburger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .nav {
-    flex-direction: column;
-    gap: 20px;
-    padding: 15px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 80px 10px 15px;
+    gap: 0;
   }
 
   .nav ul {
+    display: none;
     flex-direction: column;
-    gap: 10px;
+    gap: 0;
+    width: 100%;
+    margin-top: 8px;
+    padding: 6px 0;
+    border-top: 1px solid var(--border-color);
+  }
+
+  .nav.nav-open ul {
+    display: flex;
+  }
+
+  .nav ul li {
     width: 100%;
   }
 
   .nav a {
-    font-size: 12px;
+    display: block;
+    padding: 11px 12px;
+    font-size: 13px;
+  }
+
+  .hero-image img {
+    max-width: 260px;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .hero {
+    min-height: auto;
+    padding: 80px 20px 50px;
+  }
+
+  .hero-image {
+    flex: none;
+    width: 100%;
   }
 
   .hero-content {
@@ -1495,15 +1552,39 @@ h2::after {
   }
 
   .hero::before {
-    width: 300px;
-    height: 300px;
-    right: -20%;
+    width: 200px;
+    height: 200px;
+    right: -30%;
+    opacity: 0.5;
   }
 
   .hero::after {
-    width: 250px;
-    height: 250px;
-    left: -15%;
+    width: 180px;
+    height: 180px;
+    left: -25%;
+    opacity: 0.5;
+  }
+
+  .skill-category h3 {
+    font-size: 20px;
+    margin-bottom: 24px;
+  }
+
+  .qualification-card {
+    padding: 24px;
+    font-size: 20px;
+  }
+
+  .container {
+    padding: 50px 15px;
+  }
+
+  .dashboard-card {
+    padding: 20px;
+  }
+
+  .footer {
+    padding: 40px 15px 20px;
   }
 }
 
@@ -1557,8 +1638,38 @@ h2::after {
     font-size: 22px;
   }
 
-  .nav ul {
-    font-size: 0.8em;
+  .hero-image img {
+    max-width: 200px;
+  }
+
+  .hero {
+    padding: 60px 16px 40px;
+  }
+
+  .container {
+    padding: 40px 12px;
+  }
+
+  .qualification-card {
+    padding: 18px;
+    font-size: 18px;
+  }
+
+  .dashboard-card {
+    padding: 16px;
+  }
+
+  .dashboard-value {
+    font-size: 22px;
+  }
+
+  .network-traffic-container {
+    padding: 24px 12px;
+  }
+
+  .hero::before,
+  .hero::after {
+    display: none;
   }
 }
 
