@@ -1,0 +1,230 @@
+<div class="container">
+  <h2>Router Data Transmission Simulation</h2>
+  <p class="rsim-subtitle">Live visualization of packet routing across a real network topology</p>
+
+  <div class="rsim-wrapper">
+
+    <!-- ════════════════════════════════════════
+         SVG TOPOLOGY CANVAS
+         ════════════════════════════════════════ -->
+    <div class="rsim-canvas">
+      <svg id="rsimSVG" viewBox="0 0 800 415" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <!-- Glow: connection lines -->
+          <filter id="rsim-glow-line" x="-60%" y="-60%" width="220%" height="220%">
+            <feGaussianBlur stdDeviation="3" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <!-- Glow: packet -->
+          <filter id="rsim-glow-pkt" x="-150%" y="-150%" width="400%" height="400%">
+            <feGaussianBlur stdDeviation="6" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <!-- Glow: router (active) -->
+          <filter id="rsim-glow-router" x="-80%" y="-80%" width="260%" height="260%">
+            <feGaussianBlur stdDeviation="10" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <!-- Packet radial gradient (normal travel) -->
+          <radialGradient id="rsim-pkt-grad" cx="35%" cy="35%" r="65%">
+            <stop offset="0%"   stop-color="#ffffff" stop-opacity="0.95"/>
+            <stop offset="40%"  stop-color="#00ff88" stop-opacity="1"/>
+            <stop offset="100%" stop-color="#00d4ff" stop-opacity="0.7"/>
+          </radialGradient>
+          <!-- Packet gradient when at/near router -->
+          <radialGradient id="rsim-pkt-rtr-grad" cx="35%" cy="35%" r="65%">
+            <stop offset="0%"   stop-color="#ffffff" stop-opacity="0.95"/>
+            <stop offset="40%"  stop-color="#00ffff" stop-opacity="1"/>
+            <stop offset="100%" stop-color="#7c3aed" stop-opacity="0.7"/>
+          </radialGradient>
+        </defs>
+
+        <!-- ── Internet cloud label ── -->
+        <text x="400" y="16" class="rsim-cloud-label">☁  INTERNET</text>
+        <line x1="400" y1="20" x2="400" y2="35" class="rsim-cloud-dline"/>
+
+        <!-- ══════════════════════════════════════
+             CONNECTION LINES  (center → center)
+             ══════════════════════════════════════ -->
+        <g class="rsim-lines">
+          <!-- Router ↔ Switches -->
+          <line id="rsim-ln-r-s1"  class="rsim-line" x1="400" y1="72" x2="200" y2="212"/>
+          <line id="rsim-ln-r-s2"  class="rsim-line" x1="400" y1="72" x2="600" y2="212"/>
+          <!-- Switch 1 ↔ Clients 1-3 -->
+          <line id="rsim-ln-s1-c1" class="rsim-line" x1="200" y1="212" x2="80"  y2="348"/>
+          <line id="rsim-ln-s1-c2" class="rsim-line" x1="200" y1="212" x2="200" y2="348"/>
+          <line id="rsim-ln-s1-c3" class="rsim-line" x1="200" y1="212" x2="320" y2="348"/>
+          <!-- Switch 2 ↔ Clients 4-6 -->
+          <line id="rsim-ln-s2-c4" class="rsim-line" x1="600" y1="212" x2="480" y2="348"/>
+          <line id="rsim-ln-s2-c5" class="rsim-line" x1="600" y1="212" x2="600" y2="348"/>
+          <line id="rsim-ln-s2-c6" class="rsim-line" x1="600" y1="212" x2="720" y2="348"/>
+        </g>
+
+        <!-- ══════════════════════════════════════
+             PACKETS LAYER  (rendered above lines)
+             ══════════════════════════════════════ -->
+        <g id="rsimPackets"></g>
+
+        <!-- ══════════════════════════════════════
+             ROUTER  (center, cx=400 cy=72)
+             ══════════════════════════════════════ -->
+        <g id="rsim-router" class="rsim-node">
+          <circle cx="400" cy="72" r="40" class="router-aura"/>
+          <circle cx="400" cy="72" r="31" class="router-body"/>
+          <circle cx="400" cy="72" r="31" class="router-ring"/>
+          <!-- antenna -->
+          <line   x1="400" y1="49"  x2="400" y2="62"   class="rsim-ib"/>
+          <circle cx="400" cy="46"  r="3.5"              class="rsim-fb"/>
+          <!-- router body rect -->
+          <rect   x="386"  y="63"  width="28" height="16" rx="3" class="rsim-ib"/>
+          <!-- indicator dots -->
+          <circle cx="393" cy="71" r="2.5" class="rsim-fg"/>
+          <circle cx="400" cy="71" r="2.5" class="rsim-fg"/>
+          <circle cx="407" cy="71" r="2.5" class="rsim-fg"/>
+          <text   x="400"  y="122" class="rsim-label">ROUTER</text>
+        </g>
+
+        <!-- ══════════════════════════════════════
+             SWITCH 1  (cx=200 cy=212)
+             ══════════════════════════════════════ -->
+        <g id="rsim-sw1" class="rsim-node">
+          <rect x="166" y="191" width="68" height="42" rx="10" class="switch-aura"/>
+          <rect x="170" y="195" width="60" height="34" rx="7"  class="switch-body"/>
+          <rect x="170" y="195" width="60" height="34" rx="7"  class="switch-ring"/>
+          <!-- switch icon: two bus lines -->
+          <line x1="180" y1="207" x2="220" y2="207" class="rsim-ib"/>
+          <line x1="180" y1="215" x2="220" y2="215" class="rsim-ib"/>
+          <circle cx="184" cy="207" r="2.5" class="rsim-fg"/>
+          <circle cx="200" cy="215" r="2.5" class="rsim-fg"/>
+          <circle cx="216" cy="207" r="2.5" class="rsim-fg"/>
+          <text x="200" y="252" class="rsim-label">SWITCH 1</text>
+        </g>
+
+        <!-- ══════════════════════════════════════
+             SWITCH 2  (cx=600 cy=212)
+             ══════════════════════════════════════ -->
+        <g id="rsim-sw2" class="rsim-node">
+          <rect x="566" y="191" width="68" height="42" rx="10" class="switch-aura"/>
+          <rect x="570" y="195" width="60" height="34" rx="7"  class="switch-body"/>
+          <rect x="570" y="195" width="60" height="34" rx="7"  class="switch-ring"/>
+          <line x1="580" y1="207" x2="620" y2="207" class="rsim-ib"/>
+          <line x1="580" y1="215" x2="620" y2="215" class="rsim-ib"/>
+          <circle cx="584" cy="207" r="2.5" class="rsim-fg"/>
+          <circle cx="600" cy="215" r="2.5" class="rsim-fg"/>
+          <circle cx="616" cy="207" r="2.5" class="rsim-fg"/>
+          <text x="600" y="252" class="rsim-label">SWITCH 2</text>
+        </g>
+
+        <!-- ══════════════════════════════════════
+             CLIENT NODES  (cy=348, rects 46×32)
+             Client centers: 80, 200, 320, 480, 600, 720
+             ══════════════════════════════════════ -->
+
+        <!-- C1  cx=80 -->
+        <g id="rsim-c1" class="rsim-node rsim-client">
+          <rect x="57"  y="332" width="46" height="32" rx="7" class="client-aura"/>
+          <rect x="60"  y="335" width="40" height="26" rx="5" class="client-body"/>
+          <rect x="60"  y="335" width="40" height="26" rx="5" class="client-ring"/>
+          <rect x="66"  y="339" width="28" height="14" rx="2" class="rsim-ib"/>
+          <line x1="80" y1="353" x2="80" y2="358" class="rsim-ib"/>
+          <line x1="74" y1="358" x2="86" y2="358" class="rsim-ib"/>
+          <text x="80"  y="381" class="rsim-label rsim-label-sm">C1</text>
+        </g>
+
+        <!-- C2  cx=200 -->
+        <g id="rsim-c2" class="rsim-node rsim-client">
+          <rect x="177" y="332" width="46" height="32" rx="7" class="client-aura"/>
+          <rect x="180" y="335" width="40" height="26" rx="5" class="client-body"/>
+          <rect x="180" y="335" width="40" height="26" rx="5" class="client-ring"/>
+          <rect x="186" y="339" width="28" height="14" rx="2" class="rsim-ib"/>
+          <line x1="200" y1="353" x2="200" y2="358" class="rsim-ib"/>
+          <line x1="194" y1="358" x2="206" y2="358" class="rsim-ib"/>
+          <text x="200" y="381" class="rsim-label rsim-label-sm">C2</text>
+        </g>
+
+        <!-- C3  cx=320 -->
+        <g id="rsim-c3" class="rsim-node rsim-client">
+          <rect x="297" y="332" width="46" height="32" rx="7" class="client-aura"/>
+          <rect x="300" y="335" width="40" height="26" rx="5" class="client-body"/>
+          <rect x="300" y="335" width="40" height="26" rx="5" class="client-ring"/>
+          <rect x="306" y="339" width="28" height="14" rx="2" class="rsim-ib"/>
+          <line x1="320" y1="353" x2="320" y2="358" class="rsim-ib"/>
+          <line x1="314" y1="358" x2="326" y2="358" class="rsim-ib"/>
+          <text x="320" y="381" class="rsim-label rsim-label-sm">C3</text>
+        </g>
+
+        <!-- C4  cx=480 -->
+        <g id="rsim-c4" class="rsim-node rsim-client">
+          <rect x="457" y="332" width="46" height="32" rx="7" class="client-aura"/>
+          <rect x="460" y="335" width="40" height="26" rx="5" class="client-body"/>
+          <rect x="460" y="335" width="40" height="26" rx="5" class="client-ring"/>
+          <rect x="466" y="339" width="28" height="14" rx="2" class="rsim-ib"/>
+          <line x1="480" y1="353" x2="480" y2="358" class="rsim-ib"/>
+          <line x1="474" y1="358" x2="486" y2="358" class="rsim-ib"/>
+          <text x="480" y="381" class="rsim-label rsim-label-sm">C4</text>
+        </g>
+
+        <!-- C5  cx=600 -->
+        <g id="rsim-c5" class="rsim-node rsim-client">
+          <rect x="577" y="332" width="46" height="32" rx="7" class="client-aura"/>
+          <rect x="580" y="335" width="40" height="26" rx="5" class="client-body"/>
+          <rect x="580" y="335" width="40" height="26" rx="5" class="client-ring"/>
+          <rect x="586" y="339" width="28" height="14" rx="2" class="rsim-ib"/>
+          <line x1="600" y1="353" x2="600" y2="358" class="rsim-ib"/>
+          <line x1="594" y1="358" x2="606" y2="358" class="rsim-ib"/>
+          <text x="600" y="381" class="rsim-label rsim-label-sm">C5</text>
+        </g>
+
+        <!-- C6  cx=720 -->
+        <g id="rsim-c6" class="rsim-node rsim-client">
+          <rect x="697" y="332" width="46" height="32" rx="7" class="client-aura"/>
+          <rect x="700" y="335" width="40" height="26" rx="5" class="client-body"/>
+          <rect x="700" y="335" width="40" height="26" rx="5" class="client-ring"/>
+          <rect x="706" y="339" width="28" height="14" rx="2" class="rsim-ib"/>
+          <line x1="720" y1="353" x2="720" y2="358" class="rsim-ib"/>
+          <line x1="714" y1="358" x2="726" y2="358" class="rsim-ib"/>
+          <text x="720" y="381" class="rsim-label rsim-label-sm">C6</text>
+        </g>
+
+      </svg>
+    </div><!-- .rsim-canvas -->
+
+    <!-- ════════════════════════════════════════
+         STATS PANEL
+         ════════════════════════════════════════ -->
+    <div class="rsim-stats">
+      <div class="rsim-stats-hdr">
+        <span class="rsim-live-dot"></span>
+        NETWORK MONITOR
+      </div>
+
+      <div class="rsim-stat-row">
+        <span class="rsim-stat-ico">⬆</span>
+        <span class="rsim-stat-name">Packets Sent</span>
+        <span class="rsim-stat-val" id="rsim-stat-sent">0</span>
+      </div>
+      <div class="rsim-stat-row">
+        <span class="rsim-stat-ico">⬇</span>
+        <span class="rsim-stat-name">Packets Rcvd</span>
+        <span class="rsim-stat-val" id="rsim-stat-recv">0</span>
+      </div>
+      <div class="rsim-stat-row">
+        <span class="rsim-stat-ico">⚡</span>
+        <span class="rsim-stat-name">In Transit</span>
+        <span class="rsim-stat-val" id="rsim-stat-active">0</span>
+      </div>
+      <div class="rsim-stat-row">
+        <span class="rsim-stat-ico">🔗</span>
+        <span class="rsim-stat-name">Active Links</span>
+        <span class="rsim-stat-val">8</span>
+      </div>
+
+      <div class="rsim-topo-info">
+        <div class="rsim-topo-row"><span class="rsim-tdot rsim-tdot-r"></span>1 Router</div>
+        <div class="rsim-topo-row"><span class="rsim-tdot rsim-tdot-s"></span>2 Switches</div>
+        <div class="rsim-topo-row"><span class="rsim-tdot rsim-tdot-c"></span>6 Clients</div>
+      </div>
+    </div><!-- .rsim-stats -->
+
+  </div><!-- .rsim-wrapper -->
+</div><!-- .container -->

@@ -1,0 +1,57 @@
+<div class="container">
+  <h2>Network Dashboard</h2>
+  <div class="dashboard-grid">
+    
+    <div class="dashboard-card">
+      <div class="dashboard-label">Network Status</div>
+      <div class="dashboard-value" id="status-value">ONLINE</div>
+      <div class="dashboard-status">
+        <div class="status-dot"></div>
+        Connected
+      </div>
+    </div>
+
+    <div class="dashboard-card">
+      <div class="dashboard-label">Connected Devices</div>
+      <div class="dashboard-value" id="devices-value">0</div>
+      <div class="dashboard-status">
+        <div class="status-dot"></div>
+        Active
+      </div>
+    </div>
+
+    <div class="dashboard-card">
+      <div class="dashboard-label">Packet Flow Rate</div>
+      <div class="dashboard-value" id="packet-value">0 Mbps</div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="packet-progress" style="--progress-width: 45%"></div>
+      </div>
+    </div>
+
+    <div class="dashboard-card">
+      <div class="dashboard-label">CPU Load</div>
+      <div class="dashboard-value" id="cpu-value">0%</div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="cpu-progress" style="--progress-width: 35%"></div>
+      </div>
+    </div>
+
+    <div class="dashboard-card">
+      <div class="dashboard-label">Bandwidth Usage</div>
+      <div class="dashboard-value" id="bandwidth-value">0 GB</div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="bandwidth-progress" style="--progress-width: 62%"></div>
+      </div>
+    </div>
+
+    <div class="dashboard-card">
+      <div class="dashboard-label">Network Latency</div>
+      <div class="dashboard-value" id="latency-value">0 ms</div>
+      <div class="dashboard-status">
+        <div class="status-dot" style="background: var(--accent-green);"></div>
+        Excellent
+      </div>
+    </div>
+
+  </div>
+</div>

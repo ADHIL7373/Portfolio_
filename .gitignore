@@ -1,0 +1,47 @@
+# dependencies
+node_modules/
+
+# production build
+dist/
+build/
+
+# environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# system files
+.DS_Store
+Thumbs.db
+
+# editor folders
+.vscode/
+.idea/
+
+# misc
+*.log
+
+# unused section files (removed from site)
+sections/terminal.html
+sections/topology.html
+sections/components/terminal.js
+
+# React reference / documentation files (not used in the site)
+sections/components/App-Example.jsx
+sections/components/LiquidThemeToggle.jsx
+sections/components/IMPLEMENTATION-GUIDE.js
+sections/components/INTEGRATION-GUIDE.md
+sections/components/TAILWIND-CONFIG.js
+sections/components/index-template.html
+sections/components/README.md
+sections/components/SUMMARY.txt
+sections/components/package.json
+sections/components/context/
+sections/components/hooks/

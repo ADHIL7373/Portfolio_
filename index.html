@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mohamed Adhil | Network Engineer Portfolio</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Force page to always start at HOME section -->
+<script>
+  // Disable browser's automatic scroll restoration
+  if ('scrollRestoration' in window.history) {
+    window.history.scrollRestoration = 'manual';
+  }
+  
+  // Immediately clear any hash and force instant scroll to top
+  if (window.location.hash) {
+    window.history.replaceState(null, null, window.location.pathname);
+  }
+  window.scrollTo({ top: 0, behavior: 'instant' });
+  
+  // On page load completion, force scroll to top
+  window.addEventListener('load', function() {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  });
+  
+  // KEY FIX: Before refresh/unload, strip the hash so the page reloads at top
+  window.addEventListener('beforeunload', function() {
+    if (window.location.hash) {
+      window.history.replaceState(null, null, window.location.pathname);
+    }
+  });
+</script>
+
+<!-- Background Network Effect -->
+<div class="network-background"></div>
+
+<!-- Header -->
+<header id="navbar"></header>
+
+<!-- Dark/Light Mode Toggle -->
+<div class="theme-toggle">
+  <div class="toggle-ball"></div>
+</div>
+
+<!-- Main Content -->
+<main>
+<section id="hero"></section>
+<section id="about"></section>
+<section id="skills"></section>
+<section id="projects"></section>
+<section id="network"></section>
+<section id="router-sim"></section>
+<section id="dashboard"></section>
+</main>
+
+<!-- Footer -->
+<footer id="contact" class="footer">
+  <h2>Get In Touch</h2>
+  <div class="footer-content">
+    <div class="footer-section">
+      <h3>I'M SOCIAL</h3>
+      <div class="social-links">
+        <a href="http://www.linkedin.com/in/a-mohamed-adhil" target="_blank" class="social-icon linkedin" title="LinkedIn">in</a>
+        <a href="https://github.com/ADHIL7373" target="_blank" class="social-icon github" title="GitHub">⚙</a>
+        <a href="https://x.com/adhil43608" target="_blank" class="social-icon twitter" title="Twitter">𝕏</a>
+        <a href="mailto:mohamedadhil2024lit@sece.ac.in" class="social-icon email" title="Email">✉</a>
+      </div>
+    </div>
+    <div class="footer-section">
+      <div class="contact-item">
+        <span class="contact-label">📞 PHONE :</span>
+        <span class="contact-value">+91 9789181440</span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">📧 EMAIL :</span>
+        <span class="contact-value">mohamedadhil2024lit@sece.ac.in</span>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Mohamed Adhil | Network Engineer Portfolio</p>
+  </div>
+</footer>
+
+<!-- Scripts -->
+<script src="sections/components/navbar.js"></script>
+<script src="sections/components/animations.js"></script>
+<script src="sections/components/network.js"></script>
+<script src="sections/components/dashboard.js"></script>
+<script src="sections/components/router-sim.js"></script>
+<script src="sections/components/binary-effect.js"></script>
+
+<script>
+// Auto-load sections
+async function loadSection(id, file) {
+  const res = await fetch(file);
+  document.getElementById(id).innerHTML = await res.text();
+  
+  // Re-initialize animations and components after loading
+  if (id === 'network') {
+    setTimeout(() => initNetworkTraffic?.(), 150);
+  }
+  if (id === 'dashboard') {
+    setTimeout(() => initDashboard?.(), 150);
+  }
+  if (id === 'router-sim') {
+    setTimeout(() => initRouterSim?.(), 150);
+  }
+}
+
+// Load all sections, then scroll to top and init animations
+Promise.all([
+  loadSection("hero", "sections/hero.html"),
+  loadSection("about", "sections/about.html"),
+  loadSection("skills", "sections/skills.html"),
+  loadSection("projects", "sections/projects.html"),
+  loadSection("network", "sections/network.html"),
+  loadSection("router-sim", "sections/router-sim.html"),
+  loadSection("dashboard", "sections/dashboard.html")
+]).then(() => {
+  // Force top after all sections have been injected
+  window.scrollTo({ top: 0, behavior: 'instant' });
+  // Now that all elements exist, init scroll animations
+  if (typeof initScrollAnimations === 'function') initScrollAnimations();
+  if (typeof initBinaryEffect    === 'function') initBinaryEffect();
+});
+
+// Theme toggle functionality
+const themeToggle = document.querySelector('.theme-toggle');
+const htmlElement = document.documentElement;
+
+// Load saved theme preference
+const savedTheme = localStorage.getItem('theme') || 'dark';
+htmlElement.setAttribute('data-theme', savedTheme);
+
+themeToggle.addEventListener('click', () => {
+  const currentTheme = htmlElement.getAttribute('data-theme');
+  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  htmlElement.setAttribute('data-theme', newTheme);
+  localStorage.setItem('theme', newTheme);
+});
+</script>
+
+</body>
+</html>
