@@ -60,7 +60,6 @@
 <section id="projects"></section>
 <section id="network"></section>
 <section id="router-sim"></section>
-<section id="terminal"></section>
 <section id="dashboard"></section>
 </main>
 
@@ -99,7 +98,6 @@
 <script src="sections/components/network.js"></script>
 <script src="sections/components/dashboard.js"></script>
 <script src="sections/components/router-sim.js"></script>
-<script src="sections/components/terminal.js"></script>
 <script src="sections/components/binary-effect.js"></script>
 
 <script>
@@ -119,9 +117,6 @@ async function loadSection(id, file) {
   if (id === 'router-sim') {
     setTimeout(() => initRouterSim?.(), 150);
   }
-  if (id === 'terminal') {
-    setTimeout(() => initTerminal?.(), 150);
-  }
 }
 
 // Load all sections, then scroll to top and init animations
@@ -132,7 +127,6 @@ Promise.all([
   loadSection("projects", "sections/projects.html"),
   loadSection("network", "sections/network.html"),
   loadSection("router-sim",  "sections/router-sim.html"),
-  loadSection("terminal",    "sections/terminal.html"),
   loadSection("dashboard",   "sections/dashboard.html")
 ]).then(() => {
   // Force top after all sections have been injected
