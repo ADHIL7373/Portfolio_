@@ -106,6 +106,7 @@
 // Auto-load sections
 async function loadSection(id, file) {
   const res = await fetch(file);
+  if (!res.ok) return;
   document.getElementById(id).innerHTML = await res.text();
   
   // Re-initialize animations and components after loading

@@ -29,9 +29,7 @@ Thumbs.db
 *.log
 
 # unused section files (removed from site)
-sections/terminal.html
 sections/topology.html
-sections/components/terminal.js
 
 # React reference / documentation files (not used in the site)
 sections/components/App-Example.jsx
