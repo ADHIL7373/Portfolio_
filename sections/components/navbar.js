@@ -1,6 +1,6 @@
 document.getElementById("navbar").innerHTML = `
 <nav class="nav" id="mainNav">
-  <div class="nav-logo">➤ ADHIL</div>
+  <div class="nav-logo"><span class="logo-monogram">MA</span><span class="logo-name">Mohamed Adhil</span></div>
   <button class="nav-hamburger" id="navHamburger" aria-label="Toggle navigation">☰</button>
   <ul id="navLinks">
     <li><a href="#hero">Home</a></li>
@@ -9,6 +9,7 @@ document.getElementById("navbar").innerHTML = `
     <li><a href="#projects">Certificates</a></li>
     <li><a href="#network">Network</a></li>
     <li><a href="#router-sim">Simulation</a></li>
+    <li><a href="#terminal">Terminal</a></li>
     <li><a href="#dashboard">Dashboard</a></li>
   </ul>
 </nav>
