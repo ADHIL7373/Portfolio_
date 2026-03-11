@@ -344,6 +344,18 @@ header {
   animation: slideInRight 0.8s ease-out;
 }
 
+@media (max-width: 960px) and (min-width: 769px) {
+  .hero-content {
+    gap: 40px;
+  }
+  .hero-image {
+    flex: 0 0 300px;
+  }
+  .hero-image img {
+    width: 280px;
+  }
+}
+
 .hero-image img {
   width: 380px;
   max-width: 100%;
@@ -1423,6 +1435,16 @@ h2::after {
 }
 
 @media (max-width: 768px) {
+  .hero-image {
+    flex: none;
+    width: 100%;
+    justify-content: center;
+  }
+  .hero-content {
+    flex-direction: column;
+    gap: 30px;
+    text-align: center;
+  }
   .theme-toggle {
     top: 10px;
     right: 10px;
@@ -1478,16 +1500,7 @@ h2::after {
     padding: 80px 20px 50px;
   }
 
-  .hero-image {
-    flex: none;
-    width: 100%;
-  }
 
-  .hero-content {
-    flex-direction: column;
-    gap: 30px;
-    text-align: center;
-  }
 
   .hero-text h1 {
     font-size: 32px;
