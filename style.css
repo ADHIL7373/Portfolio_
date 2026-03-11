@@ -353,14 +353,16 @@ header {
   }
   .hero-image img {
     width: 280px;
+    height: 340px;
   }
 }
 
 .hero-image img {
   width: 380px;
+  height: 400px;
   max-width: 100%;
-  max-height: 480px;
   object-fit: cover;
+  object-position: center 15%;
   border-radius: 20px;
   border: 2px solid var(--accent-green);
   box-shadow: 0 0 30px var(--glow-green);
@@ -1492,7 +1494,8 @@ h2::after {
   }
 
   .hero-image img {
-    max-width: 260px;
+    width: 260px;
+    height: 300px;
     display: block;
     margin: 0 auto;
   }
