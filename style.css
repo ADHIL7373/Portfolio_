@@ -148,14 +148,9 @@ header {
 }
 
 .nav-logo {
-  font-size: 24px;
-  font-weight: 900;
-  background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .nav ul {
@@ -2467,23 +2462,21 @@ html, body {
 }
 
 .logo-arrow {
-  font-size: 22px;
+  font-size: 30px;
   font-weight: 900;
-  background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--accent-green);
+  -webkit-text-fill-color: var(--accent-green);
   flex-shrink: 0;
+  line-height: 1;
 }
 
 .logo-name {
-  font-size: 16px;
-  font-weight: 700;
-  background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  letter-spacing: 0.5px;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--accent-green);
+  -webkit-text-fill-color: var(--accent-green);
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
 /* â”€â”€ Hero badge â”€â”€ */
