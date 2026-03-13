@@ -8,7 +8,7 @@ document.getElementById("navbar").innerHTML = `
     <li><a href="#skills">Skills</a></li>
     <li><a href="#projects">Certificates</a></li>
     <li><a href="#projects-section">Projects</a></li>
-    <li><a href="#router-sim">Terminal</a></li>
+    <li><a href="#router-sim">Router</a></li>
     <li><a href="#dashboard">Dashboard</a></li>
   </ul>
 </nav>
