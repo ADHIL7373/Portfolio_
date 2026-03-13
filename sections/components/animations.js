@@ -13,7 +13,7 @@ function initScrollAnimations() {
   });
 
   // Observe all containers and cards
-  document.querySelectorAll(".container, .qualification-card, .skill-card, .network-skill-card, .certificate-card, .topology-container, .network-traffic-container, .terminal-container, .dashboard-card").forEach((el) => {
+  document.querySelectorAll(".container, .qualification-card, .skill-card, .network-skill-card, .certificate-card, .project-card, .topology-container, .network-traffic-container, .terminal-container, .dashboard-card").forEach((el) => {
     observer.observe(el);
   });
 }

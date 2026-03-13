@@ -2976,3 +2976,322 @@ html, body {
   .net-mon-protos  { justify-content: center; width: 100%; }
   .net-mon-stat    { padding: 4px 10px; }
 }
+
+/* ============================================
+   SECURITY & NETWORKING PROJECTS SECTION
+   ============================================ */
+
+.projects-list {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-top: 60px;
+}
+
+.project-card {
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(124, 58, 237, 0.08));
+  border: 2px solid var(--border-color);
+  border-radius: 16px;
+  padding: 40px;
+  backdrop-filter: blur(12px);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, var(--glow-blue), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 50%;
+}
+
+.project-card:hover {
+  border-color: var(--accent-blue);
+  transform: translateY(-8px);
+  box-shadow: 0 0 40px var(--glow-blue);
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(124, 58, 237, 0.12));
+}
+
+.project-card:hover::before {
+  opacity: 1;
+}
+
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.project-title {
+  font-size: 24px;
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
+  flex: 1;
+}
+
+.project-status {
+  display: inline-block;
+  padding: 6px 16px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.project-status.completed {
+  background: rgba(0, 255, 136, 0.15);
+  color: var(--accent-green);
+  border: 1px solid rgba(0, 255, 136, 0.3);
+}
+
+.project-status.ongoing {
+  background: rgba(251, 191, 36, 0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(251, 191, 36, 0.3);
+}
+
+.tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.tech-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  background: transparent;
+  border: 1.5px solid var(--accent-blue);
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent-blue);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.tech-badge:hover {
+  background: rgba(0, 212, 255, 0.1);
+  box-shadow: 0 0 15px var(--glow-blue);
+}
+
+.project-details {
+  position: relative;
+  z-index: 1;
+}
+
+.project-details h4 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--accent-green);
+  margin: 20px 0 12px 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.project-details h4:first-child {
+  margin-top: 0;
+}
+
+.project-details p {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin: 0 0 15px 0;
+}
+
+.achievement-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.achievement-list li {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+  padding-left: 20px;
+  position: relative;
+  line-height: 1.6;
+}
+
+.achievement-list li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--accent-green);
+  font-weight: 700;
+}
+
+/* Light mode overrides for project cards */
+[data-theme="light"] .project-card {
+  background: #ffffff;
+  border: 1.5px solid rgba(0, 70, 180, 0.20);
+  color: #1a1a2e;
+}
+
+[data-theme="light"] .project-card:hover {
+  background: #f0f6ff;
+  border-color: rgba(0, 70, 180, 0.45);
+  box-shadow: 0 4px 28px rgba(0, 60, 160, 0.14);
+}
+
+[data-theme="light"] .project-title {
+  background: linear-gradient(135deg, #0055cc, #007a1f);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+[data-theme="light"] .project-status.completed {
+  background: rgba(0, 120, 40, 0.12);
+  color: #006622;
+  border-color: rgba(0, 120, 40, 0.30);
+}
+
+[data-theme="light"] .project-status.ongoing {
+  background: rgba(180, 120, 0, 0.12);
+  color: #92600a;
+  border-color: rgba(180, 120, 0, 0.25);
+}
+
+[data-theme="light"] .tech-badge {
+  border-color: #0055cc;
+  color: #0055cc;
+}
+
+[data-theme="light"] .tech-badge:hover {
+  background: rgba(0, 85, 204, 0.1);
+  box-shadow: 0 0 12px rgba(0, 70, 180, 0.25);
+}
+
+[data-theme="light"] .project-details h4 {
+  color: #007a1f;
+}
+
+[data-theme="light"] .project-details p,
+[data-theme="light"] .achievement-list li {
+  color: #445;
+}
+
+[data-theme="light"] .achievement-list li::before {
+  color: #007a1f;
+}
+
+/* Responsive project cards */
+@media (max-width: 1200px) {
+  .project-card {
+    padding: 32px;
+  }
+
+  .project-header {
+    flex-direction: column;
+  }
+
+  .project-status {
+    align-self: flex-start;
+  }
+
+  .project-title {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 768px) {
+  .projects-list {
+    gap: 30px;
+    margin-top: 40px;
+  }
+
+  .project-card {
+    padding: 24px;
+  }
+
+  .project-title {
+    font-size: 20px;
+  }
+
+  .tech-stack {
+    gap: 10px;
+  }
+
+  .tech-badge {
+    font-size: 11px;
+    padding: 5px 12px;
+  }
+
+  .project-details h4 {
+    font-size: 15px;
+    margin: 16px 0 10px 0;
+  }
+
+  .project-details p {
+    font-size: 14px;
+  }
+
+  .achievement-list li {
+    font-size: 13px;
+    margin-bottom: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .projects-list {
+    gap: 20px;
+  }
+
+  .project-card {
+    padding: 18px;
+  }
+
+  .project-title {
+    font-size: 18px;
+  }
+
+  .project-header {
+    gap: 12px;
+  }
+
+  .project-status {
+    font-size: 11px;
+    padding: 5px 12px;
+  }
+
+  .tech-stack {
+    gap: 8px;
+  }
+
+  .tech-badge {
+    font-size: 10px;
+    padding: 4px 10px;
+  }
+
+  .project-details h4 {
+    font-size: 14px;
+  }
+
+  .project-details p {
+    font-size: 13px;
+  }
+
+  .achievement-list li {
+    font-size: 12px;
+  }
+}
